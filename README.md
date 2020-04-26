@@ -3,10 +3,14 @@
  * @Author: tianzhi
  * @Date: 2020-04-26 09:11:18
  * @LastEditors: tianzhi
- * @LastEditTime: 2020-04-26 11:32:13
+ * @LastEditTime: 2020-04-26 11:37:05
  -->
 # Design Pattern Note
 [《设计模式之禅》](https://book.douban.com/subject/25843319/)读书笔记，包含第二部分：设计模式。
+
+## 目录
+
+* [单例模式 *(Singleton Pattern)*](./Singleton)
 
 ## 阅前请看
 

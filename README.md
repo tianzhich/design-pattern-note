@@ -11,7 +11,7 @@
 ## 目录
 
 * [单例模式 *(Singleton Pattern)*](./Singleton)
-* [工厂方法模式 *(Factory Method Pattern)*](./Factory Method)
+* [工厂方法模式 *(Factory Method Pattern)*](./Factory%20Method)
 
 ## 阅前请看
 

@@ -2,8 +2,8 @@
  * @description: 
  * @Author: tianzhi
  * @Date: 2020-04-26 09:11:18
- * @LastEditors: tianzhi
- * @LastEditTime: 2020-04-28 10:49:18
+ * @LastEditors: tianzhi03
+ * @LastEditTime: 2020-04-29 12:40:19
  -->
 # Design Pattern Note
 [《设计模式之禅》](https://book.douban.com/subject/25843319/)读书笔记，包含第二部分：设计模式。
@@ -12,6 +12,7 @@
 
 * [单例模式 *(Singleton Pattern)*](./Singleton)
 * [工厂方法模式 *(Factory Method Pattern)*](./Factory%20Method)
+* [抽象工厂模式 *(Abstract Factory Pattern)*](./Abstract%20Factory)
 
 ## 阅前请看
 

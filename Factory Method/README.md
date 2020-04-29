@@ -220,94 +220,96 @@ public class NvWa {￼
 下面的代码我都我都显式给出了类型，由于 Typescript 类型支持协变，可以和 Java 的类型强转写法保持一致，例如：
 
 > `Human whiteHuman = YinYangLu.createHuman(WhiteHuman.class);￼`
-> 在 Typescript 中为：
-> `const whiteHuman: Human = new WhiteHuman();`
+
+在 Typescript 中为（显式给出类型`Human | null`）：
+
+> `const whiteHuman: Human | null = factory.createHuman(WhiteHuman);`
 
 ```typescript
 // 人类实例接口
 interface Human {
-  getColor(): void;
-  talk(): void;
+    getColor(): void;
+    talk(): void;
 }
 // 人类构造函数接口
 interface HumanConstructor {
-  new (): Human;
+    new(): Human;
 }
 
 // 黑色人种
 class BlackHuman implements Human {
-  public getColor() {
-    console.log("黑色人种的皮肤颜色是黑色的！");
-  }
-  public talk() {
-    console.log("黑人会说话，一般人听不懂。");
-  }
+    public getColor() {
+        console.log('黑色人种的皮肤颜色是黑色的！');
+    }
+    public talk() {
+        console.log('黑人会说话，一般人听不懂。');
+    }
 }
 
 // 黄色人种
 class YellowHuman implements Human {
-  public getColor() {
-    console.log("黄色人种的皮肤颜色是黄色的！");
-  }
-  public talk() {
-    console.log("黄色人种会说话，一般说的都是双字节。");
-  }
+    public getColor() {
+        console.log('黄色人种的皮肤颜色是黄色的！');
+    }
+    public talk() {
+        console.log('黄色人种会说话，一般说的都是双字节。');
+    }
 }
 
 // 白色人种
 class WhiteHuman implements Human {
-  public getColor() {
-    console.log("白色人种的皮肤颜色是白色的！");
-  }
-  public talk() {
-    console.log("白色人种会说话，一般都是但是单字节。");
-  }
+    public getColor() {
+        console.log('白色人种的皮肤颜色是白色的！');
+    }
+    public talk() {
+        console.log('白色人种会说话，一般都是但是单字节。');
+    }
 }
 
 // 抽象人类创建工厂
 abstract class AbstractHumanFactory {
-  abstract createHuman<T extends HumanConstructor>(humanClass: T): Human | null;
+    abstract createHuman<T extends HumanConstructor>(humanClass: T): Human | null;
 }
 
 // 人类创建工厂
 class HumanFactory extends AbstractHumanFactory {
-  createHuman<T extends HumanConstructor>(humanClass: T) {
-    let human: Human | null = null;
-    try {
-      human = new humanClass();
-    } catch {
-      console.log("人种生成错误！");
+    createHuman<T extends HumanConstructor>(humanClass: T) {
+        let human: Human | null = null;
+        try {
+            human = new humanClass();
+        } catch {
+            console.log('人种生成错误！');
+        }
+        return human;
     }
-    return human;
-  }
 }
 
 // 女娲造人
 function createHumanByNvWa() {
-  // 声明锅炉
-  const factory: AbstractHumanFactory = new HumanFactory();
-  // 女娲第一次造人，火候不足，于是白人产生了
-  console.log("--造出的第一批人是白色人种--");
-  const whiteHuman: Human = new WhiteHuman();
-  whiteHuman.getColor();
-  whiteHuman.talk();
-  // 女娲第二次造人，火候过足，于是黑人产生了
-  console.log("--造出的第一批人是白色人种--");
-  const blackHuman: Human = new BlackHuman();
-  blackHuman.getColor();
-  blackHuman.talk();
-  // 第三次造人，火候刚刚好，于是黄色人种产生了
-  console.log("--造出的第三批人是黄色人种--");
-  const yellowHuman: Human = new YellowHuman();
-  yellowHuman.getColor();
-  yellowHuman.talk();
-  // 打印结果：
-  // --造出的第一批人是白色人种--
-  // 白色人种的皮肤颜色是白色的！白色人种会说话，一般都是单字节。
-  // --造出的第二批人是黑色人种--
-  // 黑色人种的皮肤颜色是黑色的！黑人会说话，一般人听不懂。
-  // --造出的第三批人是黄色人种--
-  // 黄色人种的皮肤颜色是黄色的！黄色人种会说话，一般说的都是双字节。
+    // 声明锅炉
+    const factory: AbstractHumanFactory = new HumanFactory();
+    // 女娲第一次造人，火候不足，于是白人产生了
+    console.log('--造出的第一批人是白色人种--');
+    const whiteHuman: Human | null = factory.createHuman(WhiteHuman);
+    whiteHuman?.getColor();
+    whiteHuman?.talk();
+    // 女娲第二次造人，火候过足，于是黑人产生了
+    console.log('--造出的第二批人是黑色人种--');
+    const blackHuman: Human | null = factory.createHuman(BlackHuman);
+    blackHuman?.getColor();
+    blackHuman?.talk();
+    // 第三次造人，火候刚刚好，于是黄色人种产生了
+    console.log('--造出的第三批人是黄色人种--');
+    const yellowHuman: Human | null = factory.createHuman(YellowHuman);
+    yellowHuman?.getColor();
+    yellowHuman?.talk();
+    // 打印结果：
+    // --造出的第一批人是白色人种--
+    // 白色人种的皮肤颜色是白色的！白色人种会说话，一般都是单字节。
+    // --造出的第二批人是黑色人种--
+    // 黑色人种的皮肤颜色是黑色的！黑人会说话，一般人听不懂。
+    // --造出的第三批人是黄色人种--
+    // 黄色人种的皮肤颜色是黄色的！黄色人种会说话，一般说的都是双字节。
 }
 // 开始造人
 createHumanByNvWa();

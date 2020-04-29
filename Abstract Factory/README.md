@@ -2,8 +2,8 @@
  * @description: 
  * @Author: tianzhi
  * @Date: 2020-04-28 19:40:15
- * @LastEditors: tianzhi
- * @LastEditTime: 2020-04-29 10:51:25
+ * @LastEditors: tianzhi03
+ * @LastEditTime: 2020-04-29 12:53:20
  -->
 
 ## 定义
@@ -131,37 +131,100 @@ public class Client {￼
 #### 人种接口
 
 ```java
-public interface Human {￼      //每个人种都有相应的颜色￼      public void getColor();￼      //人类会说话￼      public void talk();￼      //每个人都有性别￼      public void getSex();￼ }
+public interface Human {￼
+    // 每个人种都有相应的颜色
+    public void getColor();
+    // 人类会说话￼
+    public void talk();￼
+    // 每个人都有性别￼
+    public void getSex();
+}
 ```
 
 #### 白色人种（省略黑色和黄色人种，和白色类似）
 
 ```java
-public abstract class AbstractWhiteHuman implements Human {￼      //白色人种的皮肤颜色是白色的￼      public void getColor(){￼              System.out.println("白色人种的皮肤颜色是白色的！");￼      }￼      //白色人种讲话￼      public void talk() {￼              System.out.println("白色人种会说话，一般说的都是单字节。");￼      }￼ }
+public abstract class AbstractWhiteHuman implements Human {￼
+    // 白色人种的皮肤颜色是白色的￼
+    public void getColor() {￼
+        System.out.println("白色人种的皮肤颜色是白色的！");￼
+    }￼
+    // 白色人种讲话
+    public void talk() {￼
+        System.out.println("白色人种会说话，一般说的都是单字节。");￼
+    }￼
+}
 ```
 
 #### 白色女性人种（省略白色男性，其他色人种，和白色女性类似）
 
 ```java
-public class FemaleWhiteHuman extends AbstractWhiteHuman {￼      //白人女性￼      public void getSex() {￼              System.out.println("白人女性");￼      }￼ }
+public class FemaleWhiteHuman extends AbstractWhiteHuman {
+    // 白人女性￼
+    public void getSex() {￼
+        System.out.println("白人女性");￼
+    }￼
+}
 ```
 
 #### 抽象工厂接口
 
 ```java
-public interface HumanFactory {￼      //制造一个黄色人种￼      public Human createYellowHuman();￼      //制造一个白色人种￼      public Human createWhiteHuman();￼      //制造一个黑色人种￼      public Human createBlackHuman();￼ }
+public interface HumanFactory {￼
+    // 制造一个黄色人种
+    public Human createYellowHuman();
+    // 制造一个白色人种￼
+    public Human createWhiteHuman();
+    // 制造一个黑色人种
+    public Human createBlackHuman();
+}
 ```
 
 #### 生产女性的工厂（八卦炉）（省略生产男性的工厂，与其类似）
 
 ```java
-public class FemaleFactory implements HumanFactory {￼      //生产出黑人女性￼      public Human createBlackHuman() {￼              return new FemaleBlackHuman();￼      }￼      //生产出白人女性￼      public Human createWhiteHuman() {￼              return new FemaleWhiteHuman();￼      }￼      //生产出黄人女性￼      public Human createYellowHuman() {￼              return new FemaleYellowHuman();￼      }￼ }
+public class FemaleFactory implements HumanFactory {
+    // 生产出黑人女性
+    public Human createBlackHuman() {￼
+        return new FemaleBlackHuman();￼
+    }￼
+    // 生产出白人女性
+    public Human createWhiteHuman() {￼
+        return new FemaleWhiteHuman();
+    }
+    // 生产出黄人女性￼
+    public Human createYellowHuman() {
+        return new FemaleYellowHuman();￼
+    }
+}
 ```
 
 #### 女娲重造人类
 
 ```java
-public class NvWa {￼      public static void main(String[] args) {￼              //第一条生产线，男性生产线￼              HumanFactory maleHumanFactory = new MaleFactory();￼              //第二条生产线，女性生产线￼              HumanFactory femaleHumanFactory = new FemaleFactory();￼              //生产线建立完毕，开始生产人了:￼              Human maleYellowHuman = maleHumanFactory.createYellowHuman();￼              Human femaleYellowHuman = femaleHumanFactory.createYellowHuman();￼              System.out.println("---生产一个黄色女性---");￼              femaleYellowHuman.getColor();￼              femaleYellowHuman.talk();￼              femaleYellowHuman.getSex();￼              System.out.println("\n---生产一个黄色男性---");￼              maleYellowHuman.getColor();￼              maleYellowHuman.talk();￼              maleYellowHuman.getSex();￼              /*￼               * ......￼               * 后面继续创建￼               */￼      }￼ }
+public class NvWa {
+    public static void main(String[] args) {￼
+        // 第一条生产线，男性生产线￼
+        HumanFactory maleHumanFactory = new MaleFactory();￼
+        // 第二条生产线，女性生产线￼
+        HumanFactory femaleHumanFactory = new FemaleFactory();￼
+        // 生产线建立完毕，开始生产人了:￼
+        Human maleYellowHuman = maleHumanFactory.createYellowHuman();￼
+        Human femaleYellowHuman = femaleHumanFactory.createYellowHuman();
+        System.out.println("---生产一个黄色女性---");
+        femaleYellowHuman.getColor();￼
+        femaleYellowHuman.talk();￼
+        femaleYellowHuman.getSex();￼
+        System.out.println("\n---生产一个黄色男性---");
+        maleYellowHuman.getColor();
+        maleYellowHuman.talk();
+        maleYellowHuman.getSex();￼
+        /*
+         * ......￼
+         * 后面继续创建
+        */￼
+    }￼
+}
 ```
 
 ### Typescript实现

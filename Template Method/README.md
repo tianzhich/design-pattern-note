@@ -3,7 +3,7 @@
  * @Author: Tian Zhi
  * @Date: 2020-05-07 09:28:12
  * @LastEditors: Tian Zhi
- * @LastEditTime: 2020-05-07 16:13:55
+ * @LastEditTime: 2020-05-07 18:09:09
  -->
 
 ## 定义
@@ -364,19 +364,25 @@ H1型号的悍马是由客户自己控制是否要响喇叭，也就是说外界
 ## 与六大设计原则的结合
 
 - [ ] Single Responsibility Principle (SRP, 单一职责原则)
-没有提及
+
+    没有提及
 
 - [x] Open Closed Principle (OCP, 开闭原则)
-模板方法模式可以增加具体类而不去修改模板，符合开闭原则。
+
+    模板方法模式可以增加具体类而不去修改模板，符合开闭原则。
 
 - [ ] Liskov Substitution Principle (LSP, 里氏替换原则)
-没有提及。在悍马例子当中，其实是符合LSP的；但是在钩子方法扩展中，出现了可以手动设置鸣笛的H1模型，这样的模型有了”个性“，其出现的时候无法用抽象的父类替代，不符合LSP。
+
+    没有提及。在悍马例子当中，其实是符合LSP的；但是在钩子方法扩展中，出现了可以手动设置鸣笛的H1模型，这样的模型有了”个性“，其出现的时候无法用抽象的父类替代，不符合LSP。
 
 - [ ] Law of Demeter (LoD, 迪米特法则)
-没有提及
+
+    没有提及
 
 - [ ] Interface Segragation Principle (ISP, 接口隔离原则)
-没有提及
+
+    没有提及
 
 - [x] Dependency Inversion Principle (DIP, 依赖倒置原则)
-模板方法模式提供了一个”抽象模板“，实现了面向抽象编程，符合DIP。
+
+    模板方法模式提供了一个”抽象模板“，实现了面向抽象编程，符合DIP。

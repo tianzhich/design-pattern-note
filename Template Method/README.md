@@ -3,7 +3,7 @@
  * @Author: Tian Zhi
  * @Date: 2020-05-07 09:28:12
  * @LastEditors: Tian Zhi
- * @LastEditTime: 2020-05-07 18:09:09
+ * @LastEditTime: 2020-05-08 09:43:30
  -->
 
 ## 定义
@@ -377,7 +377,7 @@ H1型号的悍马是由客户自己控制是否要响喇叭，也就是说外界
 
 - [ ] Law of Demeter (LoD, 迪米特法则)
 
-    没有提及
+    抽象模板中的基本方法尽量设计为protected类型，符合迪米特法则，不需要暴露的属性或方法尽量不要设置为protected类型。实现类若非必要，尽量不要扩大父类中的访问权限。
 
 - [ ] Interface Segragation Principle (ISP, 接口隔离原则)
 

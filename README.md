@@ -3,7 +3,7 @@
  * @Author: Tian Zhi
  * @Date: 2020-04-26 09:11:18
  * @LastEditors: Tian Zhi
- * @LastEditTime: 2020-05-12 09:35:50
+ * @LastEditTime: 2020-05-12 19:45:35
  -->
 # Design Pattern Note
 [《设计模式之禅》](https://book.douban.com/subject/25843319/)读书笔记，包含第二部分：设计模式。
@@ -16,6 +16,7 @@
 * [模板方法模式 *(Template Method Pattern)*](./Template%20Method)
 * [建造者模式 *(Builder Pattern)*](./Builder)
 * [代理模式 *(Proxy Pattern)*](./Proxy)
+* [原型模式 *(Prototype Pattern)*](./Prototype)
 
 ## 阅前请看
 

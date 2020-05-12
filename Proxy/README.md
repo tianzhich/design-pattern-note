@@ -3,7 +3,7 @@
  * @Author: Tian Zhi
  * @Date: 2020-05-11 11:23:38
  * @LastEditors: Tian Zhi
- * @LastEditTime: 2020-05-12 09:35:10
+ * @LastEditTime: 2020-05-12 09:43:11
  -->
 ## 定义
 
@@ -259,7 +259,7 @@ playGame();
 
 #### 普通代理的类图
 
-![普通代理类图](./common_proxy_class_diagram)
+![普通代理类图](./common_proxy_class_diagram.png)
 
 Game Player初始化的时候必须传入一个proxy，否则无法初始化。也就是说用户必须自己设置代理。
 

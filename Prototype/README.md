@@ -3,7 +3,7 @@
  * @Author: Tian Zhi
  * @Date: 2020-05-12 15:56:24
  * @LastEditors: Tian Zhi
- * @LastEditTime: 2020-05-12 19:45:09
+ * @LastEditTime: 2020-05-12 19:49:21
  -->
 
 ## 定义
@@ -173,7 +173,7 @@ public class Client {￼
 
 #### 类图
 
-![发送电子账单类图-原型模式](./mail_prototype_class_diagram)
+![发送电子账单类图-原型模式](./mail_prototype_class_diagram.png)
 
 #### Java 实现
 

@@ -3,7 +3,7 @@
  * @Author: tianzhi
  * @Date: 2020-04-28 19:40:15
  * @LastEditors: Tian Zhi
- * @LastEditTime: 2020-05-07 18:03:12
+ * @LastEditTime: 2020-05-14 20:16:56
  -->
 
 ## 定义
@@ -11,14 +11,6 @@
 > Provide an interface for creating families of related or dependent objects without specifying their concrete classes.
 
 > 为创建一组相关或相互依赖的对象提供一个接口，而且无须指定它们的具体类。
-
-## 使用场景
-
-一个对象族（或是一组没有任何关系的对象）都有相同的约束，则可以使用抽象工厂模式。
-
-例如一个文本编辑器和一个图片处理器，都是软件实体，但是nginx下的文本编辑器和Windows下的文本编辑器虽然功能和界面都相同，但是代码实现是不同的，图片处理器也有类似情况。
-
-这里的共同的约束条件是操作系统类型。一个对象族包括文本编辑器和图片处理器（nginx操作系统或windows操作系统下的）。
 
 ## 名词解释
 
@@ -295,6 +287,14 @@ function createHumanByNvWa() {
 // 开始造人
 createHumanByNvWa();
 ```
+
+## 使用场景
+
+一个对象族（或是一组没有任何关系的对象）都有相同的约束，则可以使用抽象工厂模式。
+
+例如一个文本编辑器和一个图片处理器，都是软件实体，但是nginx下的文本编辑器和Windows下的文本编辑器虽然功能和界面都相同，但是代码实现是不同的，图片处理器也有类似情况。
+
+这里的共同的约束条件是操作系统类型。一个对象族包括文本编辑器和图片处理器（nginx操作系统或windows操作系统下的）。
 
 ## 最佳实践
 

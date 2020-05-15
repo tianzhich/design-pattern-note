@@ -3,7 +3,7 @@
  * @Author: Tian Zhi
  * @Date: 2020-05-14 09:50:45
  * @LastEditors: Tian Zhi
- * @LastEditTime: 2020-05-15 09:43:41
+ * @LastEditTime: 2020-05-15 09:46:37
  -->
 
 ## 定义
@@ -14,7 +14,7 @@
 
 ## 类图
 
-![中介者模式通用类图](./example_class_diagram.png)
+![中介者模式通用类图](./class_diagram.png)
 
 从类图中看，中介者模式由以下几部分组成：
 

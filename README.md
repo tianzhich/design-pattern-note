@@ -3,7 +3,7 @@
  * @Author: Tian Zhi
  * @Date: 2020-04-26 09:11:18
  * @LastEditors: Tian Zhi
- * @LastEditTime: 2020-05-22 15:35:00
+ * @LastEditTime: 2020-05-25 14:15:59
  -->
 # Design Pattern Note
 [《设计模式之禅》](https://book.douban.com/subject/25843319/)读书笔记，包含第二部分：设计模式。
@@ -18,8 +18,9 @@
 * [代理模式 *(Proxy Pattern)*](./Proxy)
 * [原型模式 *(Prototype Pattern)*](./Prototype)
 * [中介者模式 *(Mediator Pattern)*](./Mediator)
-* [命令模式 *(Mediator Pattern)*](./Command)
+* [命令模式 *(Command Pattern)*](./Command)
 * [责任链模式 *(Chain of Responsibility Pattern)*](./Chain%20of%20Responsibility)
+* [装饰器模式 *(Decorator Pattern)*](./Decorator)
 
 ## 阅前请看
 

@@ -3,7 +3,7 @@
  * @Author: Tian Zhi
  * @Date: 2020-04-26 09:11:18
  * @LastEditors: Tian Zhi
- * @LastEditTime: 2020-05-28 19:05:31
+ * @LastEditTime: 2020-05-31 11:32:44
  -->
 # Design Pattern Note
 [《设计模式之禅》](https://book.douban.com/subject/25843319/)读书笔记，包含第二部分：设计模式。
@@ -22,6 +22,7 @@
 * [责任链模式 *(Chain of Responsibility Pattern)*](./Chain%20of%20Responsibility)
 * [装饰器模式 *(Decorator Pattern)*](./Decorator)
 * [策略模式 *(Strategy Pattern)*](./Strategy)
+* [适配器模式 *(Adapter Pattern)*](./Adapter)
 
 ## 阅前请看
 

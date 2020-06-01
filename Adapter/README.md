@@ -3,7 +3,7 @@
  * @Author: Tian Zhi
  * @Date: 2020-05-29 10:13:34
  * @LastEditors: Tian Zhi
- * @LastEditTime: 2020-05-31 11:31:26
+ * @LastEditTime: 2020-06-01 10:50:51
 --> 
 ## 定义
 适配器模式（Adapter Pattern）的定义如下：
@@ -43,31 +43,56 @@
 ### 目标角色
 
 ```java
-
+public interface Target {
+    // 目标角色有自己的方法
+    public void request();
+}
 ```
 
 ### 目标角色实现类
 
 ```java
-
+public class ConcreteTarget implements Target {
+    public void request() {
+        System.out.println("if you need any help, pls call me!");   
+    }￼
+}
 ```
 
 ### 源角色
 
 ```java
-
+public class Adaptee {￼
+    // 原有的业务逻辑
+    public void doSomething() {
+        System.out.println("I'm kind of busy, leave me alone, pls!");￼
+    }￼
+}
 ```
 
 ### 适配器角色
 
 ```java
-
+public class Adapter extends Adaptee implements Target {
+    public void request() {￼
+        super.doSomething();
+    }
+}
 ```
 
 ### 场景类
 
 ```java
-
+public class Client {￼
+    public static void main(String[] args) {
+        // 原有的业务逻辑
+        Target target = new ConcreteTarget();￼
+        target.request();￼
+        // 现在增加了适配器角色后的业务逻辑￼
+        Target target2 = new Adapter();
+        target2.request();￼
+    }￼
+}
 ```
 
 ## 案例-人员信息管理模块的业务扩展
@@ -81,13 +106,69 @@
 **员工信息接口**
 
 ```java
-
+public interface IUserInfo {
+    // 获得用户姓名￼
+    public String getUserName();
+    // 获得家庭地址
+    public String getHomeAddress();
+    // 手机号码，这个太重要，手机泛滥呀￼
+    public String getMobileNumber();
+    // 办公电话，一般是座机
+    public String getOfficeTelNumber();
+    // 这个人的职位是什么￼
+    public String getJobPosition();
+    // 获得家庭电话，这有点不好，我不喜欢打家庭电话讨论工作
+    public String getHomeTelNumber();
+}
 ```
 
 **实现类**
 
 ```java
-
+public class UserInfo implements IUserInfo {￼
+    /*￼
+    * 获得家庭地址，下属送礼也可以找到地方￼
+    */￼
+    public String getHomeAddress() {
+        System.out.println("这里是员工的家庭地址...");￼
+        return null;￼
+    }
+    /*￼
+    * 获得家庭电话号码￼
+    */￼
+    public String getHomeTelNumber() {￼
+        System.out.println("员工的家庭电话是...");￼
+        return null;
+    }￼
+    /*
+    * 员工的职位，是部门经理还是普通职员￼
+    */
+    public String getJobPosition() {￼
+        System.out.println("这个人的职位是BOSS...");￼
+        return null;
+    }
+    /*￼
+    * 手机号码￼
+    */￼
+    public String getMobileNumber() {
+        System.out.println("这个人的手机号码是0000...");￼
+        return null;
+    }
+    /*
+    * 办公室电话，烦躁的时候最好"不小心"把电话线踢掉￼
+    */
+    public String getOfficeTelNumber() {
+        System.out.println("办公室电话是...");
+        return null;
+    }
+    /*
+    * 姓名，这个很重要
+    */
+    public String getUserName() {
+        System.out.println("姓名叫做...");
+        return null;￼
+    }
+}
 ```
 
 过了一段时间，公司开始招募了一批外包同学，需要从劳动服务公司同步外包同学的人员信息，但是他们人员信息的接口和当前的接口不一致：
@@ -99,13 +180,48 @@
 **劳动服务公司的人员信息接口**
 
 ```java
-
+public interface IOuterUser {￼
+    // 基本信息，比如名称、性别、手机号码等
+    public Map getUserBaseInfo();￼
+    // 工作区域信息￼
+    public Map getUserOfficeInfo();￼
+    // 用户的家庭信息￼
+    public Map getUserHomeInfo();
+}
 ```
 
 **劳动服务公司的人员实现**
 
 ```java
-
+public class OuterUser implements IOuterUser {
+    /*
+    * 用户的基本信息￼
+    */￼
+    public Map getUserBaseInfo() {
+        HashMap baseInfoMap = new HashMap();
+        baseInfoMap.put("userName", "这个员工叫混世魔王...");￼
+        baseInfoMap.put("mobileNumber", "这个员工电话是...");
+        return baseInfoMap;
+    }
+    /*￼
+    * 员工的家庭信息
+    */
+    public Map getUserHomeInfo() {￼
+        HashMap homeInfo = new HashMap();
+        homeInfo.put("homeTelNumbner", "员工的家庭电话是...");￼
+        homeInfo.put("homeAddress", "员工的家庭地址是...");￼
+        return homeInfo;
+    }
+    /*
+    * 员工的工作信息，比如，职位等￼
+    */
+    public Map getUserOfficeInfo() {
+        HashMap officeInfo = new HashMap();￼
+        officeInfo.put("jobPosition","这个人的职位是BOSS...");
+        officeInfo.put("officeTelNumber", "员工的办公电话是...");￼
+        return officeInfo;
+    }￼
+}
 ```
 
 现在肯定不能因为他们的接口不同就对原先的接口进行改造。我们只能拿到他们的数据之后，中间加一层转换处理，转化为当前的数据对象：
@@ -121,19 +237,90 @@
 #### 中转角色
 
 ```java
-
+public class OuterUserInfo extends OuterUser implements IUserInfo {￼
+    private Map baseInfo = super.getUserBaseInfo();  // 员工的基本信息￼
+    private Map homeInfo = super.getUserHomeInfo(); // 员工的家庭信息￼
+    private Map officeInfo = super.getUserOfficeInfo(); //工作信息
+    /*
+    * 家庭地址￼
+    */￼
+    public String getHomeAddress() {
+        String homeAddress = (String)this.homeInfo.get("homeAddress");
+        System.out.println(homeAddress);￼
+        return homeAddress;
+    }
+    /*
+    * 家庭电话号码
+    */￼
+    public String getHomeTelNumber() {￼
+        String homeTelNumber = (String)this.homeInfo.get("homeTelNumber");
+        System.out.println(homeTelNumber);￼
+        return homeTelNumber;
+    }￼
+    /*
+    * 职位信息￼
+    */
+    public String getJobPosition() {￼
+        String jobPosition = (String)this.officeInfo.get("jobPosition");
+        System.out.println(jobPosition);￼
+        return jobPosition;￼
+    }￼
+    /*￼
+    * 手机号码
+    */￼
+    public String getMobileNumber() {
+        String mobileNumber = (String)this.baseInfo.get("mobileNumber");
+        System.out.println(mobileNumber);￼
+        return mobileNumber;
+    }￼
+    /*￼
+    * 办公电话
+    */
+    public String getOfficeTelNumber() {
+        String officeTelNumber = (String)this.officeInfo.get("officeTelNumber");
+        System.out.println(officeTelNumber);
+        return officeTelNumber;
+    }￼
+    /*
+    * 员工的名称￼
+    */￼
+    public String getUserName() {
+        String userName = (String)this.baseInfo.get("userName");￼
+        System.out.println(userName);
+        return userName;￼
+    }￼
+}
 ```
 
 #### 场景类-查看公司员工
 
 ```java
-
+public class Client {
+￼    public static void main(String[] args) {
+        // 没有与外系统连接的时候，是这样写的
+        IUserInfo youngGirl = new UserInfo();
+        // 从数据库中查到101个
+        for(int i = 0; i < 101; i++) {￼
+            youngGirl.getMobileNumber();
+        }
+    }
+}
 ```
 
 #### 场景类-查看外包员工
 
 ```java
-
+public class Client {￼
+    public static void main(String[] args) {
+        // 老板一想不对呀，兔子不吃窝边草，还是找借用人员好点
+        // 我们只修改了这句话￼
+        IUserInfo youngGirl = new OuterUserInfo();
+        // 从数据库中查到101个
+        for(int i = 0; i < 101; i++) {￼
+            youngGirl.getMobileNumber();
+        }￼
+    }
+}
 ```
 
 使用了适配器模式只在高层模块修改了一句话，其他的业务逻辑都不用修改，而且在实际系统中只是增加了一个业务类的继承，就实现了可以查本公司的员工信息，也可以查劳动服务公司的员工信息，尽量少的修改，通过扩展的方式解决了该问题，这就是适配模式。
@@ -141,7 +328,172 @@
 ### TypeScript实现
 
 ```typescript
+// 员工信息接口
+interface IUserInfo {
+    // 获得用户姓名￼
+    getUserName(): string;
+    // 获得家庭地址
+    getHomeAddress(): string;
+    // 手机号码，这个太重要，手机泛滥呀￼
+    getMobileNumber(): string;
+    // 办公电话，一般是座机
+    getOfficeTelNumber(): string;
+    // 这个人的职位是什么￼
+    getJobPosition(): string;
+    // 获得家庭电话，这有点不好，我不喜欢打家庭电话讨论工作
+    getHomeTelNumber(): string;
+}
 
+// 员工信息实现类
+class UserInfo implements IUserInfo {
+    /*￼
+    * 获得家庭地址，下属送礼也可以找到地方￼
+    */
+    getHomeAddress() {
+        return "这里是员工的家庭地址...";
+    }
+    /*￼
+    * 获得家庭电话号码￼
+    */
+    getHomeTelNumber() {
+        return "员工的家庭电话是...";
+    }
+    /*
+    * 员工的职位，是部门经理还是普通职员￼
+    */
+    getJobPosition() {
+        return "这个人的职位是BOSS...";
+    }
+    /*￼
+    * 手机号码￼
+    */
+    getMobileNumber() {
+        return "这个人的手机号码是0000...";
+    }
+    /*
+    * 办公室电话，烦躁的时候最好"不小心"把电话线踢掉￼
+    */
+    getOfficeTelNumber() {
+        return "办公室电话是...";
+    }
+    /*
+    * 姓名，这个很重要
+    */
+    getUserName() {
+        return "姓名叫做...";
+    }
+}
+
+// UserBaseInfoMap
+type UserBaseInfoMap = Map<'userName' | 'mobileNumber', string>;
+
+// UserOfficeInfoMap
+type UserOfficeInfoMap = Map<'jobPosition' | 'officeTelNumber', string>;
+
+// UserHomeInfoMap
+type UserHomeInfoMap = Map<'homeTelNumber' | 'homeAddress', string>;
+
+// 劳动服务公司的人员信息接口
+interface IOuterUser {
+    // 基本信息，比如名称、性别、手机号码等
+    getUserBaseInfo(): UserBaseInfoMap;
+    // 工作区域信息￼
+    getUserOfficeInfo(): UserOfficeInfoMap;
+    // 用户的家庭信息￼
+    getUserHomeInfo(): UserHomeInfoMap;
+}
+
+// 劳动服务公司的人员实现
+class OuterUser implements IOuterUser {
+    /*
+    * 用户的基本信息￼
+    */
+    getUserBaseInfo() {
+        const baseInfo: UserBaseInfoMap = new Map();
+        baseInfo.set("userName", "这个员工叫混世魔王...");
+        baseInfo.set("mobileNumber", "这个员工电话是...");
+        return baseInfo;
+    }
+    /*￼
+    * 员工的家庭信息
+    */
+    getUserHomeInfo() {
+        const homeInfo: UserHomeInfoMap = new Map();
+        homeInfo.set("homeTelNumber", "员工的家庭电话是...");
+        homeInfo.set("homeAddress", "员工的家庭地址是...");
+        return homeInfo;
+    }
+    /*
+    * 员工的工作信息，比如，职位等￼
+    */
+    getUserOfficeInfo() {
+        const officeInfo: UserOfficeInfoMap = new Map();
+        officeInfo.set("jobPosition","这个人的职位是BOSS...");
+        officeInfo.set("officeTelNumber", "员工的办公电话是...");
+        return officeInfo;
+    }
+}
+
+// 中转角色
+class OuterUserInfo extends OuterUser implements IUserInfo {
+    private baseInfo = super.getUserBaseInfo();  // 员工的基本信息￼
+    private homeInfo = super.getUserHomeInfo(); // 员工的家庭信息￼
+    private officeInfo = super.getUserOfficeInfo(); //工作信息
+    /*
+    * 家庭地址￼
+    */
+    getHomeAddress() {
+        const homeAddress = this.homeInfo.get("homeAddress");
+        return homeAddress || '';
+    }
+    /*
+    * 家庭电话号码
+    */
+    getHomeTelNumber() {
+        const homeTelNumber = this.homeInfo.get("homeTelNumber");
+        return homeTelNumber || '';
+    }
+    /*
+    * 职位信息￼
+    */
+    getJobPosition() {
+        const jobPosition = this.officeInfo.get("jobPosition");
+        return jobPosition || '';
+    }
+    /*￼
+    * 手机号码
+    */
+    getMobileNumber() {
+        const mobileNumber = this.baseInfo.get("mobileNumber");
+        return mobileNumber || '';
+    }
+    /*￼
+    * 办公电话
+    */
+    getOfficeTelNumber() {
+        const officeTelNumber = this.officeInfo.get("officeTelNumber");
+        return officeTelNumber || '';
+    }
+    /*
+    * 员工的名称￼
+    */
+    getUserName() {
+        const userName = this.baseInfo.get("userName");
+        return userName || '';
+    }
+}
+
+// 查看员工场景
+(function() {
+    // 查看公司员工
+    const youngGirl = new UserInfo();
+    // 查看外包员工
+    // const youngGirl = new OuterUserInfo();
+    // 从数据库中查到5个
+    for(let i = 0; i < 5; i++) {
+        console.log(youngGirl.getMobileNumber())
+    }
+})()
 ```
 
 ## 适配器模式的扩展
@@ -159,25 +511,106 @@
 #### 用户基本信息接口（用户家庭信息接口和用户工作信息接口类似，此处省略）
 
 ```java
-
+public interface IOuterUserBaseInfo {
+    // 基本信息，比如名称、性别、手机号码等
+    public Map getUserBaseInfo();￼
+}
 ```
 
 #### 用户基本信息（用户家庭信息和工作信息类似，此处省略）
 
 ```java
-
+public class OuterUserBaseInfo implements IOuterUserBaseInfo {￼
+    /*￼
+    * 用户的基本信息
+    */
+    public Map getUserBaseInfo() {
+        HashMap baseInfoMap = new HashMap();￼
+        baseInfoMap.put("userName", "这个员工叫混世魔王...");
+        baseInfoMap.put("mobileNumber", "这个员工电话是...");￼
+        return baseInfoMap;
+    }￼
+}
 ```
 
 #### 适配器
 
 ```java
-
+public class OuterUserInfo implements IUserInfo {￼
+    // 源目标对象￼
+    private IOuterUserBaseInfo baseInfo = null;     // 员工的基本信息￼
+    private IOuterUserHomeInfo homeInfo = null;     // 员工的家庭信息￼
+    private IOuterUserOfficeInfo officeInfo = null; // 工作信息￼
+    // 数据处理
+    private Map baseMap = null;￼
+    private Map homeMap = null;￼
+    private Map officeMap = null;￼
+    // 构造函数传递对象
+    public OuterUserInfo(IOuterUserBaseInfo _baseInfo, IOuterUserHomeInfo _homeInfo, IOuterUserOfficeInfo _officeInfo) {
+        this.baseInfo = _baseInfo;￼
+        this.homeInfo = _homeInfo;￼
+        this.officeInfo = _officeInfo;￼
+        // 数据处理
+        this.baseMap = this.baseInfo.getUserBaseInfo();￼
+        this.homeMap = this.homeInfo.getUserHomeInfo();￼
+        this.officeMap = this.officeInfo.getUserOfficeInfo();
+    }￼
+    // 家庭地址￼
+    public String getHomeAddress() {￼
+        String homeAddress = (String)this.homeMap.get("homeAddress");￼
+        System.out.println(homeAddress);
+        return homeAddress;￼
+    }￼
+    // 家庭电话号码￼
+    public String getHomeTelNumber() {￼
+        String homeTelNumber = (String)this.homeMap.get("homeTelNumber");￼
+        System.out.println(homeTelNumber);
+        return homeTelNumber;￼
+    }
+    // 职位信息
+    public String getJobPosition() {￼
+        String jobPosition = (String)this.officeMap.get("jobPosition");￼
+        System.out.println(jobPosition);
+        return jobPosition;￼
+    }￼
+    // 手机号码
+    public String getMobileNumber() {
+        String mobileNumber = (String)this.baseMap.get("mobileNumber");
+        System.out.println(mobileNumber);￼
+        return mobileNumber;￼
+    }￼
+    // 办公电话
+    public String getOfficeTelNumber() {
+        String officeTelNumber= (String)this.officeMap.get("officeTelNumber");￼
+        System.out.println(officeTelNumber);
+        return officeTelNumber;￼
+    }
+    // 员工的名称￼
+    public String getUserName() {
+        String userName = (String)this.baseMap.get("userName");￼
+        System.out.println(userName);￼
+        return userName;
+    }
+}
 ```
 
-#### 场景器
+#### 场景类
 
 ```java
-
+public class Client {￼
+    public static void main(String[] args) {
+        // 外系统的人员信息￼
+        IOuterUserBaseInfo baseInfo = new OuterUserBaseInfo();￼
+        IOuterUserOfficeInfo officeInfo = new OuterUserOfficeInfo();
+        IOuterUserHomeInfo homeInfo = new OuterUserHomeInfo();
+        IUserInfo youngGirl = new OuterUserInfo(baseInfo,homeInfo,officeInfo);￼
+        // 传递三个对象
+        for (int i = 0; i < 101; i++) {
+            // 从数据库中查到101个￼
+            youngGirl.getMobileNumber();￼
+        }￼
+    }￼
+}
 ```
 
 `OuterUserInfo`此时变成了委托服务，把`IUserInfo`接口需要的所有的操作都委托给其他三个接口下的实现类，它的委托是通过对象层次的关联关系进行委托的，而不是继承关系。这种适配器叫做**对象适配器**，我们之前讲的通过继承进行的适配，叫做**类适配器**。

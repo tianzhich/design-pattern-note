@@ -24,6 +24,9 @@
 * [策略模式 *(Strategy Pattern)*](./Strategy)
 * [适配器模式 *(Adapter Pattern)*](./Adapter)
 * [组合模式 *(Composite Pattern)*](./Composite)
+* [观察者模式 *(Observer Pattern)*](./Observer)
+* [门面模式 *(Facade Pattern)*](./Facade)
+* [备忘录模式 *(Memento Pattern)*](./Memento)
 
 ## 阅前请看
 

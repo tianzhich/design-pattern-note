@@ -3,7 +3,7 @@
  * @Author: Tian Zhi
  * @Date: 2020-04-26 09:11:18
  * @LastEditors: Tian Zhi
- * @LastEditTime: 2020-06-19 16:22:45
+ * @LastEditTime: 2020-07-20 20:25:48
  -->
 # Design Pattern Note
 [《设计模式之禅》](https://book.douban.com/subject/25843319/)读书笔记，包含第二部分：设计模式。
@@ -27,6 +27,7 @@
 * [观察者模式 *(Observer Pattern)*](./Observer)
 * [门面模式 *(Facade Pattern)*](./Facade)
 * [备忘录模式 *(Memento Pattern)*](./Memento)
+* [访问者模式 *(Visitor Pattern)*](./Visitor)
 
 ## 阅前请看
 
